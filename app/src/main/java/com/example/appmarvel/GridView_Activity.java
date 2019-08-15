@@ -1,74 +1,52 @@
+
 package com.example.appmarvel;
 
-import androidx.appcompat.app.AppCompatActivity;
+        import androidx.annotation.NonNull;
+        import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.TextView;
+        import android.content.Intent;
+        import android.os.Bundle;
+        import android.view.MenuItem;
+        import android.widget.ImageView;
+        import android.widget.TextView;
 
 public class GridView_Activity extends AppCompatActivity {
 
-    GridView gridView;
-
-    String[] nomePersonagens = {"Capitã Marvel"};
-
-    int[] imagePersonagens = {R.drawable.capita_marvel_thumb};
+    TextView lstPersonagens;
+    ImageView imgPersonagens;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.grid_view_layout);
 
-        gridView = (GridView) findViewById(R.id.GridView);
+        lstPersonagens = (TextView) findViewById(R.id.IDNome);
+        imgPersonagens = (ImageView) findViewById(R.id.IDImagem);
 
-        CustomAdapter customAdapter = new CustomAdapter();
-        gridView.setAdapter(customAdapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), Personagem_Activity.class);
-                intent.putExtra("name", nomePersonagens[position]);
-                intent.putExtra("imagem", imagePersonagens[position]);
-                startActivity(intent);
-            }
-        });
+        Intent intent = getIntent();
+        String nomeRetorno = intent.getStringExtra("name");
+        int imageRetorno = intent.getIntExtra("imagem", 0);
+
+        lstPersonagens.setText(nomeRetorno);
+        imgPersonagens.setImageResource(imageRetorno);
+
+        //getActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home){
+            onBackPressed();
         }
 
-    public class CustomAdapter extends BaseAdapter {
-        @Override
-        public int getCount() { return imagePersonagens.length;} {
+        return super.onOptionsItemSelected(item);
+    }
 
-        }
-
-        @Override
-        public Object getItem(int position){ return null;} {
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            View view = getLayoutInflater().inflate(R.layout.data_view, null);
-
-            TextView name = (TextView) view.findViewById(R.id.IDNome);
-            ImageView image = (ImageView) view.findViewById(R.id.IDImagem);
-
-            name.setText(nomePersonagens[position]);
-            image.setImageResource(imagePersonagens[position]);
-
-            return view;
-        }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }
+
 

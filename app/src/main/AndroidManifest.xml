@@ -10,17 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".GridView_Activity"></activity>
-        <activity android:name=".Personagem_Activity">
+        <activity android:name=".Personagem_Activity"></activity>
+        <activity android:name=".Login_Activity"></activity>
+        <activity android:name=".MainActivity" android:theme="@style/AppTheme2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login_Activity"></activity>
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/AppTheme2" />
     </application>
 
 </manifest>
